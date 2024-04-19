@@ -1,0 +1,58 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Lane Detection</title>
+    <style>
+      body {
+        background: url('static/bh.webp') no-repeat center center fixed;  /* Update with the correct filename */
+        background-size: cover;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: white;
+      }
+
+      h1 {
+        margin-top: 0;
+        color: black; /* Change the color to black */
+      }
+
+      #startButton {
+        padding: 10px 20px;
+        font-size: 18px;
+        cursor: pointer;
+      }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <h1>Welcome to Lane Detection</h1>
+    <button id="startButton">Start Lane Detection</button>
+    <div id="videoContainer" style="display:none;">
+      <img id="videoFeed" src="{{ url_for('video_feed') }}">
+    </div>
+    
+    <script>
+      $(document).ready(function(){
+        $("#startButton").click(function(){
+          $("#startButton").hide();
+          $("#videoContainer").show();
+
+          // Add key event listener
+          $(document).on('keydown', function(e) {
+            if (e.key === 'q' || e.key === 'Q') {
+              $("#videoContainer").hide();  // Hide the video container
+              $("#startButton").show();     // Show the start button
+            }
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
